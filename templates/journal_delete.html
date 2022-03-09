@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+<div class="px-4 py-5 my-5">
+    <form method="POST" action="{% url 'journal-delete' journal.id %}">
+        {% csrf_token %}
+        <p>Are your sure you want to delete this journal? <b>"{{journal}}"</b> </p>
+        <input class="button" type="submit" value="Delete" />
+    </form>
+</div>
+    </section>
+
+{% endblock %}

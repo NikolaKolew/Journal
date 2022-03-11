@@ -25,13 +25,15 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
 
 
 class Profile(models.Model):
+    FIRST_NAME_MAX_CHARS = 25
+    LAST_NAME_MAX_CHARS = 25
+
     first_name = models.CharField(
-        max_length=25,
+        max_length=FIRST_NAME_MAX_CHARS,
     )
 
     last_name = models.CharField(
-        max_length=100,
-
+        max_length=LAST_NAME_MAX_CHARS,
     )
 
     picture = models.FileField(

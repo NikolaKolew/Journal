@@ -6,7 +6,6 @@ from Journal.web_app.views import index_view, ProfileList, CreateJornal, Journal
 
 
 
-#TODO separete urls add urls for registration and login to different app
 
 urlpatterns = (
     path('', index_view, name='index'),

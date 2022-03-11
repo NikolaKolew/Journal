@@ -5,6 +5,7 @@ UserModel = get_user_model()
 
 
 class Journal(models.Model):
+    TITLE_MAX_CHARS = 50
     user = models.ForeignKey(
         UserModel,
         on_delete=models.CASCADE,
@@ -16,7 +17,7 @@ class Journal(models.Model):
     )
 
     title = models.CharField(
-        max_length=200
+        max_length=TITLE_MAX_CHARS
     )
 
     description = models.TextField(

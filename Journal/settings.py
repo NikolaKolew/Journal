@@ -141,5 +141,4 @@ LOGIN_URL = 'login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#TODO remove web_app make different app for user authentication
 AUTH_USER_MODEL = 'auth_accounts.AppUser'

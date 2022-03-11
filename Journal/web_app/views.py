@@ -4,6 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+
+from Journal.web_app.forms import EditJournalForm
 from Journal.web_app.models import Journal
 
 UserModel = get_user_model()
@@ -47,7 +49,7 @@ class JournalDetail(LoginRequiredMixin, DetailView):
 class JournalUpdate(LoginRequiredMixin, UpdateView):
     model = Journal
     template_name = 'journal_update.html'
-    fields = ('title', 'picture', 'description')
+    form_class = EditJournalForm
     success_url = reverse_lazy('journals')
 
 

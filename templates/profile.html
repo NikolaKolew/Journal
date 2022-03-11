@@ -7,7 +7,11 @@
     <div class="card p-4">
         <div class=" image d-flex flex-column justify-content-center align-items-center">
             <button class="btn btn-secondary">
-            <img src="#" height="100" width="100" />
+                {% if user.profile.picture %}
+                    <img src="{{ user.profile.picture }}" height="100" width="100" />
+                    {% else %}
+                    <img src="{{ user.profile.picture }}" height="100" width="100" />
+                {% endif %}
         </button>
             <span class="name mt-3">{{ user.profile.first_name }} {{ user.profile.last_name }}</span>
             <span class="idd">{{user.email}}</span>

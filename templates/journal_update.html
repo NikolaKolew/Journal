@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-<section>
+    <link rel="stylesheet" href="/static/css/journals_edit.css">
+<section class="editPage">
     <div class="container">
         <div class="row">
             <div class="col-lg-3"></div>
                 <div class="px-4 py-5 my-5 col-lg-6">
                 <form method="POST" class="container mb-5" action="{% url 'journal-update' journal.id %}">
-                {% csrf_token %}
-                    <div class="form-group">
-                        {{form.as_p}}
-                    </div>
+
+                <div class="container">
+                    {% csrf_token %}
+                    {{ form.as_p }}
                     <button class="btn btn-primary mt-2" type="submit">Update</button>
+                </div>
                 </form>
                 </div>
             <div class="col-lg-3"></div>

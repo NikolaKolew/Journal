@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Journal.web_app',
+    'Journal.auth_accounts',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,7 @@ WSGI_APPLICATION = 'Journal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'journal_test',
+        'NAME': 'journal_test2',
         'USER': 'postgres',
         'PASSWORD': '1123QwER',
         'HOST': '127.0.0.1',
@@ -140,4 +141,5 @@ LOGIN_URL = 'login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'web_app.AppUser'
+#TODO remove web_app make different app for user authentication
+AUTH_USER_MODEL = 'auth_accounts.AppUser'

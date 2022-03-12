@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Journal.web_app',
     'Journal.auth_accounts',
+    'Journal.web_posts',
 ]
 
 MIDDLEWARE = [

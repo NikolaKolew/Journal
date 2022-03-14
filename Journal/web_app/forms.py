@@ -13,6 +13,6 @@ class EditJournalForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Journal
         fields = '__all__'
-        exclude=('user',)
+        exclude = ('user',)
 
 

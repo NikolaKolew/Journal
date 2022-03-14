@@ -34,7 +34,6 @@ class PostDetail(LoginRequiredMixin, DetailView):
     context_object_name = 'post'
     template_name = 'posts/post_details.html'
 
-
     def get_context_data(self, *args, **kwargs):
         context = super(PostDetail, self).get_context_data()
         likes = get_object_or_404(Post, id=self.kwargs['pk'])

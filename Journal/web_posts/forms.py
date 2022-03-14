@@ -21,8 +21,8 @@ class EditPostForm(BootstrapFormMixin, forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = '__all__'
-        exclude = ('user',)
+        fields = ('feeling', 'title', 'body')
+        exclude = ('user', 'like')
 
 
 class CreateCommentForm(BootstrapFormMixin, forms.ModelForm):

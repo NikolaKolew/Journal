@@ -55,9 +55,15 @@
         <div class="hero__content h-100 container-custom position-relative">
             <div class="d-flex h-100 align-items-center hero__content-width">
                 <div class="text-white">
+                    {% if user.is_authenticated %}
+                        <h1 class="hero__heading fw-bold mb-4">Welcome to Journal {{ user.profile.first_name }}</h1>
+                    <p class="lead mb-4">Started like application for journals now is something like small social media.</p>
+                        <a href="{% url 'journals' %}" class="mt-2 btn btn-lg btn-outline-light" role="button">Journals</a>
+                    {% else %}
                     <h1 class="hero__heading fw-bold mb-4">Welcome to Journal</h1>
                     <p class="lead mb-4">Started like application for journals now is something like small social media.</p>
-                    <a href="{% url 'register' %}" class="mt-2 btn btn-lg btn-outline-light" role="button">Create account</a>
+                        <a href="{% url 'register' %}" class="mt-2 btn btn-lg btn-outline-light" role="button">Create account</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

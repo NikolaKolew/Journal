@@ -20,11 +20,11 @@ class ProfileList(LoginRequiredMixin, ListView):
     model = Journal
     context_object_name = 'journals'
     template_name = 'journal/journals.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['journals'] = context['journals'].filter(user=self.request.user)
         return context
-
 
 
 class CreateJornal(LoginRequiredMixin, CreateView):
@@ -43,7 +43,6 @@ class JournalDetail(LoginRequiredMixin, DetailView):
     model = Journal
     context_object_name = 'journal'
     template_name = 'journal/journal_details.html'
-
 
 
 class JournalUpdate(LoginRequiredMixin, UpdateView):

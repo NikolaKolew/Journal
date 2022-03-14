@@ -55,10 +55,7 @@ class Post(models.Model):
         ordering = ['create']
 
 
-
-
 class Comment(models.Model):
-
     post = models.ForeignKey(
         Post,
         related_name='comments',

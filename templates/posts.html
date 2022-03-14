@@ -14,11 +14,11 @@
         </div>
 
     </section>
-
+{% for post in posts %}
     <div class="album py-5 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-1">
-          {% for post in posts %}
+
         <div class="col">
           <div class="card shadow-sm">
             <div class="card-body">
@@ -27,9 +27,11 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                     {% if user == post.user %}
+                        <a href="{% url 'detail-post' post.id %}" class="btn btn-sm btn-outline-secondary ">View comments</a>
                     <a href="{% url 'update-post' post.id %}" class="btn btn-sm btn-outline-secondary ">Edit</a>
                     <a href="{% url 'delete-post' post.id %}" class="btn btn-sm btn-outline-secondary ">Delete</a>
                         {% else %}
+                        <a href="{% url 'detail-post' post.id %}" class="btn btn-sm btn-outline-secondary ">View comments</a>
                         <a href="#" class="btn btn-sm btn-outline-secondary ">Follow {{ post.user }}</a>
                     {% endif %}
                 </div>
@@ -38,9 +40,10 @@
             </div>
           </div>
         </div>
-          {% endfor %}
+
       </div>
     </div>
     </div>
+    {% endfor %}
 
 {% endblock %}

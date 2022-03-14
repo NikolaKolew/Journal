@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+
 UserModel = get_user_model()
 
 
@@ -27,3 +28,19 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['create']
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post,
+        related_name='comments',
+        on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )
+    description = models.TextField()
+    create = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+

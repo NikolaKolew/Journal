@@ -36,6 +36,14 @@ class Profile(models.Model):
         max_length=LAST_NAME_MAX_CHARS,
     )
 
+    followers = models.IntegerField(
+        default=0,
+    )
+
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
     picture = models.FileField(
         null=True,
         blank=True,

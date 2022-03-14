@@ -1,6 +1,6 @@
 from django.urls import path
 
-from Journal.web_posts.views import PostList, CreatePost, EditPost, DeletePost, PostDetail, CreateComment, EditComment, DeleteComment
+from Journal.web_posts.views import PostList, CreatePost, EditPost, DeletePost, PostDetail, CreateComment, EditComment, DeleteComment, like_view
 
 urlpatterns = (
     path('', PostList.as_view(), name='posts'),
@@ -11,4 +11,5 @@ urlpatterns = (
     path('detail-post/<int:pk>/comment/', CreateComment.as_view(), name='create-comment'),
     path('edit-comment/<int:pk>/', EditComment.as_view(), name='edit-comment'),
     path('delete-comment/<int:pk>/', DeleteComment.as_view(), name='delete-comment'),
+    path('like/<int:pk>/', like_view, name='like_post'),
 )

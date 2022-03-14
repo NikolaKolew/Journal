@@ -14,3 +14,5 @@ class EditJournalForm(BootstrapFormMixin, forms.ModelForm):
         model = Journal
         fields = '__all__'
         exclude=('user',)
+
+

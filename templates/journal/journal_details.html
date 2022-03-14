@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="px-4 py-5 my-5 text-center">
+
+    <div class="card text-center">
+  <div class="card-header">
+      {{ journal.title }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">{{ journal.description}}</p>
+    <a href="{% url 'journals' %}" class="btn btn-primary">Go back</a>
+  </div>
+  <div class="card-footer text-muted">
+      {{ journal.create|timesince}}
+  </div>
+</div>
+    </div>
+{% endblock %}

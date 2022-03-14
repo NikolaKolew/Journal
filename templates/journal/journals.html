@@ -27,7 +27,7 @@
               <h1 class="card-title">{{ journal.title }}</h1>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="#" class="btn btn-sm btn-outline-secondary ">Read</a>
+                  <a href="{% url 'details' journal.id%}" class="btn btn-sm btn-outline-secondary ">Read</a>
                     <a href="{% url 'journal-update' journal.id %}" class="btn btn-sm btn-outline-secondary ">Edit</a>
                     <a href="{% url 'journal-delete' journal.id %}" class="btn btn-sm btn-outline-secondary ">Delete</a>
                 </div>
@@ -40,5 +40,7 @@
       </div>
     </div>
     </div>
+        {% include 'footer.html' %}
+
 
 {% endblock %}

@@ -19,7 +19,7 @@ def index_view(request):
 class ProfileList(LoginRequiredMixin, ListView):
     model = Journal
     context_object_name = 'journals'
-    template_name = 'journals.html'
+    template_name = 'journal/journals.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['journals'] = context['journals'].filter(user=self.request.user)
@@ -32,7 +32,7 @@ class CreateJornal(LoginRequiredMixin, CreateView):
     # TODO add image upload
     fields = ('title', 'description')
     success_url = reverse_lazy('journals')
-    template_name = 'journal_create.html'
+    template_name = 'journal/journal_create.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -42,19 +42,19 @@ class CreateJornal(LoginRequiredMixin, CreateView):
 class JournalDetail(LoginRequiredMixin, DetailView):
     model = Journal
     context_object_name = 'journal'
-    template_name = 'journal_details.html'
+    template_name = 'journal/journal_details.html'
 
 
 
 class JournalUpdate(LoginRequiredMixin, UpdateView):
     model = Journal
-    template_name = 'journal_update.html'
+    template_name = 'journal/journal_update.html'
     form_class = EditJournalForm
     success_url = reverse_lazy('journals')
 
 
 class JournalDelete(LoginRequiredMixin, DeleteView):
     model = Journal
-    template_name = 'journal_delete.html'
+    template_name = 'journal/journal_delete.html'
     context_object_name = 'journal'
     success_url = reverse_lazy('journals')

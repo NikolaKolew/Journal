@@ -1,5 +1,7 @@
+
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils.datetime_safe import date
 
 UserModel = get_user_model()
 
@@ -28,6 +30,7 @@ class Journal(models.Model):
     create = models.DateTimeField(
         auto_now_add=True
     )
+
 
     def __str__(self):
         return self.title

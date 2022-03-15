@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from Journal.web_app.forms import EditJournalForm
+from Journal.web_app.forms import EditJournalForm, CreateJournalForm
 from Journal.web_app.models import Journal
 
 UserModel = get_user_model()
@@ -29,8 +29,7 @@ class ProfileList(LoginRequiredMixin, ListView):
 
 class CreateJornal(LoginRequiredMixin, CreateView):
     model = Journal
-    # TODO add image upload
-    fields = ('title', 'description')
+    form_class = CreateJournalForm
     success_url = reverse_lazy('journals')
     template_name = 'journal/journal_create.html'
 

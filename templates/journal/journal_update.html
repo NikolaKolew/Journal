@@ -12,7 +12,9 @@
             <form method="post" action="{% url 'journal-update' journal.id %}">
                 <div class="container">
                 {% csrf_token %}
+                    <div class="form-group">
                 {{ form }}
+                    </div>
                 <button class="btn btn-primary mt-2" type="submit">Edit</button>
                     <a href="{% url 'journals' %}" class="btn btn-primary mt-2">Back</a>
                 </div>

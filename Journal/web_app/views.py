@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
 
 from Journal.web_app.forms import EditJournalForm, CreateJournalForm
 from Journal.web_app.models import Journal
@@ -11,9 +11,14 @@ from Journal.web_app.models import Journal
 UserModel = get_user_model()
 
 
+# if request.path
+
 # TODO make CBV for the index page
-def index_view(request):
-    return render(request, 'index.html')
+# def index_view(request):
+#     return render(request, 'index.html')
+
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
 
 class ProfileList(LoginRequiredMixin, ListView):

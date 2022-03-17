@@ -1,3 +1,4 @@
+from annoying.fields import AutoOneToOneField
 from django.db import models
 from django.contrib.auth import models as auth_models
 
@@ -22,6 +23,9 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     USERNAME_FIELD = 'email'
 
     objects = AppUsersManager()
+
+    def __str__(self):
+        return f'{self.email}'
 
 
 class Profile(models.Model):
@@ -54,3 +58,19 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
+
+class BanUser(models.Model):
+    user = models.OneToOneField(
+        AppUser,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+
+    is_banned = models.BooleanField(
+        default=False,
+    )
+

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6 px-4 py-5 my-5">
+                    <h1 class="text-center">Ban. By clicking the field you will ban the user.</h1>
+                    <form method="post">
+                        <div class="container">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form }}
+                            </div>
+                            <button class="btn btn-primary mt-2" type="submit">Ban</button>
+                            <a href="{% url 'dashboard' %}" class="btn btn-primary mt-2">Back</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+{% endblock %}

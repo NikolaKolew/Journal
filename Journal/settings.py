@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Journal.web_app',
     'Journal.auth_accounts',
     'Journal.web_posts',
+    'annoying',
 ]
 
 MIDDLEWARE = [

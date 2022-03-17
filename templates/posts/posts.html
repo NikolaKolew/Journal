@@ -1,54 +1,154 @@
 {% extends 'base.html' %}
 {% block content %}
-       <div class="album py-5 bg-light">
+    <div class="album py-5 bg-light">
 
         <div class="px-4 py-5 my-5 text-center">
             <!-- <img class="d-block mx-auto mb-4" src="#" alt="" width="72" height="57"> -->
             <h1 class="display-5 fw-bold">Welcome {{ user.profile.first_name }}</h1>
+
+            {% if user.is_staff %}
+                <h4>You are from the Journal staff here you can see all the public posts and if something is
+                    against our policy you are free to remove it.</h4>
+                {% elif user.banuser.is_banned %}
+                <h4>You are baned from the staff to make new posts or to comment posts.</h4>
+            {% else %}
+                <h4>Welcome to Journal public blog. Here you can write posts, read other users posts, or you can start
+                    simply conversation under post that you chose by commenting the post.</h4>
+            {% endif %}
             <div class="col-lg-6 mx-auto">
                 <p class="lead mb-4"></p>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <a href="{% url 'create-post' %}" type="button" class="btn btn-primary btn-lg px-4 gap-3">Write new post</a>
+                {% if request.user.is_staff or user.banuser.is_banned %}
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a href="#" type="button" class="btn btn-primary btn-lg px-4 gap-3">Write new post</a>
+                    </div>
+                {% else %}
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a href="{% url 'create-post' %}" type="button" class="btn btn-primary btn-lg px-4 gap-3">Write
+                            new post</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    {% for post in posts %}
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-1">
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ post.user }} </h5>
+                                {% if post.feeling %}
+                                    <h7>feeling {{ post.feeling }} today</h7>
+                                {% endif %}
+                                <h1 class="card-title">{{ post.title }}</h1>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        {% if user == post.user %}
+                                            <a href="{% url 'detail-post' post.id %}"
+                                               class="btn btn-sm btn-outline-secondary ">View post</a>
+                                            <a href="{% url 'update-post' post.id %}"
+                                               class="btn btn-sm btn-outline-secondary ">Edit</a>
+                                            <a href="{% url 'delete-post' post.id %}"
+                                               class="btn btn-sm btn-outline-secondary ">Delete</a>
+                                        {% elif request.user.is_staff %}
+                                            <a href="{% url 'detail-post' post.id %}"
+                                               class="btn btn-sm btn-outline-secondary ">View post</a>
+                                            <a href="{% url 'delete-post' post.id %}"
+                                               class="btn btn-sm btn-outline-secondary ">Delete</a>
+
+                                        {% else %}
+                                            <a href="{% url 'detail-post' post.id %}"
+                                               class="btn btn-sm btn-outline-secondary ">View post</a>
+                                            <a href="#" class="btn btn-sm btn-outline-secondary ">Follow</a>
+                                        {% endif %}
+                                    </div>
+                                    <small class="text-muted">{{ post.create }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-       </div>
-{% for post in posts %}
-    <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-1">
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">{{ post.user }} </h5>
-            {% if post.feeling %}
-            <h7>feeling {{ post.feeling }} today</h7>
-            {% endif %}
-              <h1 class="card-title">{{ post.title }}</h1>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    {% if user == post.user %}
-                        <a href="{% url 'detail-post' post.id %}" class="btn btn-sm btn-outline-secondary ">View post</a>
-                    <a href="{% url 'update-post' post.id %}" class="btn btn-sm btn-outline-secondary ">Edit</a>
-                    <a href="{% url 'delete-post' post.id %}" class="btn btn-sm btn-outline-secondary ">Delete</a>
-                        {% else %}
-                        <a href="{% url 'detail-post' post.id %}" class="btn btn-sm btn-outline-secondary ">View post</a>
-                        <a href="#" class="btn btn-sm btn-outline-secondary ">Follow</a>
-                    {% endif %}
-                </div>
-                <small class="text-muted">{{ post.create }}</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    </div>
     {% endfor %}
-        {% include 'footer.html' %}
+
+    <div class="album py-5 bg-light">
+        <div class="px-4 py-5 my-5 text-center">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="btn btn-sm btn-outline-secondary">first</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-sm btn-outline-secondary">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-sm btn-outline-secondary">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-sm btn-outline-secondary">last</a>
+        {% endif %}
+    </span>
+        </div>
+    </div>
 
 
+
+    {% include 'footer.html' %}
 {% endblock %}
+
+{#{% extends 'base.html' %}#}
+{#{% block content %}#}
+{#       <div class="album py-5 bg-light">#}
+{##}
+{#        <div class="px-4 py-5 my-5 text-center">#}
+{#            <!-- <img class="d-block mx-auto mb-4" src="#" alt="" width="72" height="57"> -->#}
+{#            <h1 class="display-5 fw-bold">Welcome {{ user.profile.first_name }}</h1>#}
+{#            <div class="col-lg-6 mx-auto">#}
+{#                <p class="lead mb-4"></p>#}
+{#                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">#}
+{#                    <a href="{% url 'create-post' %}" type="button" class="btn btn-primary btn-lg px-4 gap-3">Write new post</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#       </div>#}
+{#{% for post in posts %}#}
+{#    <div class="album py-5 bg-light">#}
+{#    <div class="container">#}
+{#      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-1">#}
+{##}
+{#        <div class="col">#}
+{#          <div class="card shadow-sm">#}
+{#            <div class="card-body">#}
+{#                <h5 class="card-title">{{ post.user }} </h5>#}
+{#            {% if post.feeling %}#}
+{#            <h7>feeling {{ post.feeling }} today</h7>#}
+{#            {% endif %}#}
+{#              <h1 class="card-title">{{ post.title }}</h1>#}
+{#              <div class="d-flex justify-content-between align-items-center">#}
+{#                <div class="btn-group">#}
+{#                    {% if user == post.user %}#}
+{#                        <a href="{% url 'detail-post' post.id %}" class="btn btn-sm btn-outline-secondary ">View post</a>#}
+{#                    <a href="{% url 'update-post' post.id %}" class="btn btn-sm btn-outline-secondary ">Edit</a>#}
+{#                    <a href="{% url 'delete-post' post.id %}" class="btn btn-sm btn-outline-secondary ">Delete</a>#}
+{#                        {% else %}#}
+{#                        <a href="{% url 'detail-post' post.id %}" class="btn btn-sm btn-outline-secondary ">View post</a>#}
+{#                        <a href="#" class="btn btn-sm btn-outline-secondary ">Follow</a>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#                <small class="text-muted">{{ post.create }}</small>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#      </div>#}
+{#    </div>#}
+{#    </div>#}
+{#    {% endfor %}#}
+{#        {% include 'footer.html' %}#}
+{##}
+{##}
+{#{% endblock %}#}

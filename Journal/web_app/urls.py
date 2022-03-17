@@ -1,11 +1,12 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 
-from Journal.web_app.views import index_view, ProfileList, CreateJornal, JournalDetail, \
-    JournalUpdate, JournalDelete, IndexView
+from Journal.web_app.views import ProfileList, CreateJornal, JournalDetail, \
+    JournalUpdate, JournalDelete, IndexView, HomeView
 
 urlpatterns = (
     path('', IndexView.as_view(), name='index'),
+    path('home/', HomeView.as_view(), name='home'),
     path('journals/', ProfileList.as_view(), name='journals'),
     path('create-journal/', CreateJornal.as_view(), name='create-journal'),
     path('journal/<int:pk>/', JournalDetail.as_view(), name='details'),

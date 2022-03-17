@@ -1,13 +1,13 @@
 from django.contrib.auth import get_user_model, login
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, get_object_or_404
 
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView
 
-from Journal.auth_accounts.forms import UserRegistrationForm, EditProfileForm
-from Journal.auth_accounts.models import Profile
+from Journal.auth_accounts.forms import UserRegistrationForm, EditProfileForm, BanUserForm
+from Journal.auth_accounts.models import Profile, BanUser
 from Journal.web_posts.models import Post
 
 UserModel = get_user_model()
@@ -16,7 +16,7 @@ UserModel = get_user_model()
 class RegisterPage(CreateView):
     form_class = UserRegistrationForm
     template_name = 'user/register.html'
-    success_url = reverse_lazy('journals')
+    success_url = reverse_lazy('home')
     redirect_authenticated_user = True
 
     def form_valid(self, form):
@@ -26,7 +26,7 @@ class RegisterPage(CreateView):
 
     def get(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return redirect('journals')
+            return redirect('home')
         return super(RegisterPage, self).get(*args, **kwargs)
 
 
@@ -36,7 +36,7 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse_lazy('journals')
+        return reverse_lazy('home')
 
 
 class ProfileDetail(LoginRequiredMixin, ListView):
@@ -56,3 +56,30 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'user/profile_edit.html'
     form_class = EditProfileForm
     success_url = reverse_lazy('profile-page')
+
+
+class BanUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = BanUser
+    template_name = 'user/ban_user.html'
+    form_class = BanUserForm
+    success_url = reverse_lazy('dashboard')
+
+    def test_func(self):
+        return self.request.user.email.endswith('@staff.com')
+
+
+
+class DashboardStaff(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = Profile
+    template_name = 'user/staff_dashboard.html'
+
+    def test_func(self):
+        return self.request.user.email.endswith('@staff.com')
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardStaff, self).get_context_data()
+        total_posts = Post.objects.filter().count()
+        total_users = get_user_model().objects.all()
+        context['total_posts'] = total_posts
+        context['total_users'] = total_users
+        return context

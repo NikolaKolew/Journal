@@ -27,6 +27,7 @@ class PostList(LoginRequiredMixin, ListView):
     context_object_name = 'posts'
     template_name = 'posts/posts.html'
     ordering = ['-create']
+    paginate_by = 5
 
 
 class PostDetail(LoginRequiredMixin, DetailView):

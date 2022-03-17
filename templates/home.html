@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <link rel="canonical" href="/static/css/home.css">
+     <div class="album py-5 bg-light">
+        <div class="px-4 py-5 my-5 text-center">
+<div class="b-example-divider"></div>
+  <div class="container my-5">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+      <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+        <h1 class="display-4 fw-bold lh-1">Welcome {{ user.profile.first_name }}</h1>
+        <p class="lead">This is Journal you can create Journals, or you can start easy conversation in the Posts section
+            In Posts section you can write, read and comment users posts.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+          <a href="{% url 'posts' %}"  class="btn btn-outline-secondary btn-lg px-4 me-md-2 fw-bold">Posts</a>
+          <a href="{% url 'journals' %}" class="btn btn-outline-secondary btn-lg px-4 me-md-2 fw-bold">Journals</a>
+        </div>
+      </div>
+      <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+          <img class="rounded-lg-3" src="/static/images/home_screen.png" alt="" width="720">
+      </div>
+    </div>
+  </div>
+        </div>
+     </div>
+    {% include 'footer.html' %}
+{% endblock %}

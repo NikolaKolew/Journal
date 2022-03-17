@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <div class="album py-5 bg-light">
+
+        <div class="px-4 py-5 my-5 text-center">
+            <h1 class="display-5 fw-bold">Welcome {{ user.profile.first_name }} to staff Dashboard</h1>
+
+            <h4>Here you can see all the users and if something is
+                against our policy you are free to block.</h4>
+        </div>
+
+    </div>
+    {% for user in total_users %}
+        {% if not user.is_staff %}
+            <div class="album py-1 bg-light">
+
+                <div class="container mt-4 mb-4 p-3 d-flex justify-content-center album py-5">
+                    <div class="card p-4">
+                        <div class=" image d-flex flex-column justify-content-center align-items-center">
+                            <span class="name mt-3">{{ user.profile.first_name }} {{ user.profile.last_name }}</span>
+                            <span class="idd">{{ user.email }}</span>
+                            <div class=" d-flex mt-2"><a href="{% url 'ban-update' user.id %}" class="btn btn-dark">Ban</a></div>
+                            {% if not user.profile.description %}
+                                <div class="text mt-3"><span>No description</span></div>
+                            {% else %}
+                                <div class="text mt-3"><span>{{ user.profile.description }} </span></div>
+                            {% endif %}
+                            <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"><span><i
+                                    class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span>
+                                <span><i
+                                        class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span>
+                            </div>
+                            <div class="px-2 rounded mt-4 date "><span class="join">Joined {{ user.date_joined }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {% include 'footer.html' %}
+{% endblock %}

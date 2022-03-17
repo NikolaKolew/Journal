@@ -20,6 +20,8 @@ UserModel = get_user_model()
 class IndexView(TemplateView):
     template_name = 'index.html'
 
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = 'home.html'
 
 class ProfileList(LoginRequiredMixin, ListView):
     model = Journal

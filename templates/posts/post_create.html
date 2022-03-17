@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3"></div>
+    <div class="album py-5 bg-light">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3"></div>
                 <div class="px-4 py-5 my-5 col-lg-6">
-                <form method="POST" class="container mb-5" action="{% url 'create-post' %}">
-                {% csrf_token %}
-                    {{ form }}
-                    <button class="btn btn-primary mt-2" type="submit">Create</button>
-                </form>
+                    <form method="POST" class="container mb-5" action="{% url 'create-post' %}">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button class="btn btn-primary mt-2" type="submit">Create</button>
+                    </form>
                 </div>
-            <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+            </div>
         </div>
     </div>
-</section>
-        {% include 'footer.html' %}
+    {% include 'footer.html' %}
 
 {% endblock %}

@@ -4,16 +4,27 @@ from django import forms
 
 from Journal.auth_accounts.models import Profile, BanUser
 from Journal.helpers.helpers import BootstrapFormMixin
+from Journal.validators.validators import name_only_letters_validator
 
 UserModel = get_user_model()
 
 
-class UserRegistrationForm(UserCreationForm):
+class UserRegistrationForm(BootstrapFormMixin, UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_form_controls()
+
     first_name = forms.CharField(
         max_length=Profile.FIRST_NAME_MAX_CHARS,
+        validators=(
+            name_only_letters_validator,
+        )
     )
     last_name = forms.CharField(
         max_length=Profile.LAST_NAME_MAX_CHARS,
+        validators=(
+            name_only_letters_validator,
+        )
     )
 
     def save(self, commit=True):
@@ -26,12 +37,11 @@ class UserRegistrationForm(UserCreationForm):
         )
         if commit:
             profile.save()
-
         return user
 
     class Meta:
         model = UserModel
-        fields = ('email', 'password1', 'password2', 'first_name', 'last_name')
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2',)
 
 
 class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
@@ -42,7 +52,7 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('first_name', 'last_name', 'picture', 'description')
-        exclude=('user',)
+        exclude = ('user',)
 
 
 class BanUserForm(BootstrapFormMixin, forms.ModelForm):

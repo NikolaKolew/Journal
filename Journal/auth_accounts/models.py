@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth import models as auth_models
 
 from Journal.auth_accounts.managers import AppUsersManager
+from Journal.validators.validators import name_only_letters_validator
 
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
@@ -34,10 +35,16 @@ class Profile(models.Model):
 
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_CHARS,
+        validators=(
+            name_only_letters_validator,
+        )
     )
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_CHARS,
+        validators=(
+            name_only_letters_validator,
+        )
     )
 
     followers = models.IntegerField(

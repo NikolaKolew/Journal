@@ -28,16 +28,14 @@ class ProfileCreateView(TestCase):
         self.assertEqual(self.VALID_USER_DATA['last_name'], profile.last_name)
         self.assertEqual(self.VALID_USER_DATA['email'], user.email)
 
-    # def test_create_profile_valid_data_except_to_redirect_to_home_page(self):
-    #     response = self.client.post(
-    #         reverse('register'),
-    #         data=self.VALID_USER_DATA,
-    #     )
-    #     user = AppUser.objects.first()
-    #     profile = Profile.objects.first()
-    #
-    #     expected_url = reverse('home', user)
-    #     self.assertRedirects(response, expected_url)
+    def test_create_profile_valid_data_except_to_redirect_to_home_page(self):
+        response = self.client.post(
+            reverse('register'),
+            data=self.VALID_USER_DATA,
+        )
+
+        expected_url = reverse('home')
+        self.assertRedirects(response, expected_url)
 
 
 

@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from Journal.validators.validators import min_length_validator
+
 UserModel = get_user_model()
 
 
@@ -34,6 +36,9 @@ class Post(models.Model):
 
     title = models.CharField(
         max_length=TITLE_MAX_CHARS,
+        validators=(
+            min_length_validator,
+        )
     )
 
     like = models.ManyToManyField(

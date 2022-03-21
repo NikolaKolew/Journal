@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from Journal.auth_accounts.models import AppUser
@@ -14,6 +15,20 @@ class TestPostsModels(TestCase):
         'body': 'Hello',
         'title': 'New post',
         'user_id': 1,
+    }
+
+    INVALID_POST_CREDENTIALS = {
+        # title <= 1 raises ValidationError
+        'feeling': 'HAPPY',
+        'body': 'Hello',
+        'title': 'N',
+        'user_id': 1,
+    }
+
+    INVALID_USER_FOR_POST_CREDENTIALS = {
+        'body': 'Hello',
+        'title': 'New post',
+        'user_id': 2,
     }
 
     VALID_COMMENT_CREDENTIALS = {
@@ -37,3 +52,25 @@ class TestPostsModels(TestCase):
         post.save()
         comment.save()
         self.assertIsNotNone(comment.pk)
+
+    def test_valid_post_invalid_user_excepts_validation_error(self):
+        user = AppUser(**self.VALID_USER_CREDENTIALS)
+        post = Post(**self.INVALID_USER_FOR_POST_CREDENTIALS)
+
+        with self.assertRaises(ValidationError) as context:
+            post.full_clean()
+            user.full_clean()
+            user.save()
+            post.save()
+        self.assertIsNotNone(context.exception)
+
+    def test_post_title_less_or_equal_to_one_excepts_validation_error(self):
+        user = AppUser(**self.VALID_USER_CREDENTIALS)
+        post = Post(**self.INVALID_POST_CREDENTIALS)
+
+        with self.assertRaises(ValidationError) as context:
+            post.full_clean()
+            user.full_clean()
+            user.save()
+            post.save()
+        self.assertIsNotNone(context.exception)

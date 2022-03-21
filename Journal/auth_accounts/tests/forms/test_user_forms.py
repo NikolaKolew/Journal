@@ -43,6 +43,16 @@ class ProfileFormsTests(TestCase):
 
         self.assertTrue(form.is_valid())
 
+    def test_profile_edit_form_when_name_is_less_or_equal_to_one_excepts_validation_error(self):
+        data = {
+            'first_name': 'N',
+            'last_name': self.VALID_USER_DATA['last_name'],
+        }
+
+        form = EditProfileForm(data)
+
+        self.assertFalse(form.is_valid())
+
     def test_profile_edit_form_when_form_is_not_valid_except_to_be__not_valid(self):
         data = {
             'first_name': self.IVALID_USER_DATA_COINTAINS_DIGITS_IN_NAMES['first_name'],

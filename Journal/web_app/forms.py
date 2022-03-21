@@ -4,7 +4,6 @@ from Journal.helpers.helpers import BootstrapFormMixin
 from Journal.web_app.models import Journal
 
 
-
 class EditJournalForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,5 +24,3 @@ class CreateJournalForm(BootstrapFormMixin, forms.ModelForm):
         model = Journal
         fields = '__all__'
         exclude = ('user',)
-
-

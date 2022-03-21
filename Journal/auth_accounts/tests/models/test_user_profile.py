@@ -37,6 +37,38 @@ class ProfileTests(TestCase):
             profile.save()
         self.assertIsNotNone(context.exception)
 
+    def test_first_name_less_or_equal_to_one_excepts_validation_error(self):
+        first_name = 'N'
+        profile = Profile(
+            first_name=first_name,
+            last_name=self.VALID_PROFILE_CREDENTIALS['last_name'],
+            user_id=self.VALID_PROFILE_CREDENTIALS['user_id']
+        )
+
+        user = AppUser(**self.VALID_USER_CREDENTIALS)
+        with self.assertRaises(ValidationError) as context:
+            profile.full_clean()
+            user.full_clean()
+            user.save()
+            profile.save()
+        self.assertIsNotNone(context.exception)
+
+    def test_last_name_less_or_equal_to_one_excepts_validation_error(self):
+        last_name = 'N'
+        profile = Profile(
+            first_name=self.VALID_PROFILE_CREDENTIALS['first_name'],
+            last_name=last_name,
+            user_id=self.VALID_PROFILE_CREDENTIALS['user_id']
+        )
+
+        user = AppUser(**self.VALID_USER_CREDENTIALS)
+        with self.assertRaises(ValidationError) as context:
+            profile.full_clean()
+            user.full_clean()
+            user.save()
+            profile.save()
+        self.assertIsNotNone(context.exception)
+
     def test_last_name_contains_digit__expects_to_fail(self):
         last_name = '1Nikola11'
         profile = Profile(

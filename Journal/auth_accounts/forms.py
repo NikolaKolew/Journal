@@ -55,6 +55,8 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
         exclude = ('user',)
 
 
+
+
 class BanUserForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -63,4 +65,4 @@ class BanUserForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = BanUser
         fields = ('is_banned',)
-        exclude= ('user',)
+        exclude = ('user',)

@@ -32,11 +32,15 @@ class RegisterPage(CreateView):
 
 class CustomLoginView(LoginView):
     template_name = 'user/login.html'
-    fields = '__all__'
-    redirect_authenticated_user = True
+    # fields = '__all__'
+    # redirect_authenticated_user = True
+    success_url = reverse_lazy('home')
+
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        if self.success_url:
+            return self.success_url
+        return super().get_success_url()
 
 
 class ProfileDetail(LoginRequiredMixin, ListView):

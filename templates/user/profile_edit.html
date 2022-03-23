@@ -2,22 +2,23 @@
 {% block content %}
     <div class="album py-5 bg-light">
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6 px-4 py-5 my-5">
-            <h1 class="text-center">Edit Your Profile Info</h1>
-            <form method="post" action="{% url 'profile-update' user.id %}">
-                <div class="container">
-                {% csrf_token %}
-                {{ form }}
-                <button class="btn btn-primary mt-2" type="submit">Edit</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6 px-4 py-5 my-5">
+                    <h1 class="text-center">Edit Your Profile Info</h1>
+                    <form method="post" action="{% url 'profile-update' user.id %}">
+                        <div class="container">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button class="btn btn-primary mt-2" type="submit">Edit</button>
+                            <a href="{% url 'profile-page' %}" class="btn btn-primary mt-2">Back</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col-lg-3"></div>
+            </div>
         </div>
-        <div class="col-lg-3"></div>
     </div>
-</div>
-    </div>
-        {% include 'footer.html' %}
+    {% include 'footer.html' %}
 {% endblock %}

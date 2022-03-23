@@ -4,7 +4,7 @@ from django import forms
 
 from Journal.auth_accounts.models import Profile, BanUser
 from Journal.helpers.helpers import BootstrapFormMixin
-from Journal.validators.validators import name_only_letters_validator
+from Journal.validators.validators import name_only_letters_validator, min_length_validator
 
 UserModel = get_user_model()
 
@@ -18,12 +18,14 @@ class UserRegistrationForm(BootstrapFormMixin, UserCreationForm):
         max_length=Profile.FIRST_NAME_MAX_CHARS,
         validators=(
             name_only_letters_validator,
+            min_length_validator,
         )
     )
     last_name = forms.CharField(
         max_length=Profile.LAST_NAME_MAX_CHARS,
         validators=(
             name_only_letters_validator,
+            min_length_validator,
         )
     )
 
@@ -55,9 +57,8 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
         exclude = ('user',)
 
 
+
 class BanUserForm(forms.ModelForm):
-
-
     class Meta:
         model = BanUser
         fields = ('is_banned',)

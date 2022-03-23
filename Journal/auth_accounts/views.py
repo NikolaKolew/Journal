@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.shortcuts import redirect, get_object_or_404
 
 from django.urls import reverse_lazy
@@ -91,3 +91,8 @@ class DashboardStaff(LoginRequiredMixin, UserPassesTestMixin, ListView):
         context['total_posts'] = total_posts
         context['total_users'] = total_users
         return context
+
+
+class UserChangePassword(PasswordChangeView):
+    template_name = 'user/change_password.html'
+    success_url = reverse_lazy('login')

@@ -37,10 +37,15 @@ class PostDetail(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PostDetail, self).get_context_data()
-        likes = get_object_or_404(Post, id=self.kwargs['pk'])
-        total_likes = likes.total_likes()
+        stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes()
+        liked = False
+        if stuff.like.filter(email=self.request.user).exists():
+            liked = True
         context['total_likes'] = total_likes
+        context['liked'] = liked
         return context
+
 
 
 class CreateComment(LoginRequiredMixin, CreateView):
@@ -87,5 +92,11 @@ class DeleteComment(LoginRequiredMixin, DeleteView):
 
 def like_view(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    post.like.add(request.user)
+    liked = False
+    if post.like.filter(id=request.user.id).exists():
+        post.like.remove(request.user)
+        liked = False
+    else:
+        post.like.add(request.user)
+        liked = True
     return HttpResponseRedirect(reverse('detail-post', args=[str(pk)]))

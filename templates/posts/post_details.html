@@ -13,12 +13,21 @@
                         <a href="{% url 'posts' %}" class="btn btn-sm btn-outline-secondary">Go back</a>
                         {% if not user.is_staff and not user.banuser.is_banned %}
                             <a href="{% url 'create-comment' post.id %}" class="btn btn-sm btn-outline-secondary">Comment</a>
+                            {% if liked %}
                             <form action="{% url 'like_post' post.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" name="post_id" value="{{ post.id }}"
+                                        class="btn btn-sm btn-outline-danger">Unlike
+                                </button>
+                            </form>
+                                {% else %}
+                                <form action="{% url 'like_post' post.id %}" method="POST">
                                 {% csrf_token %}
                                 <button type="submit" name="post_id" value="{{ post.id }}"
                                         class="btn btn-sm btn-outline-secondary">Like
                                 </button>
                             </form>
+                                {% endif %}
                         {% endif %}
                     </div>
                 </div>

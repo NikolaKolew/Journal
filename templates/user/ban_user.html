@@ -5,19 +5,40 @@
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6 px-4 py-5 my-5">
-                    <h1 class="text-center">Ban. By clicking the field you will ban the user.</h1>
-                    <form method="post">
-                        <div class="container">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                {{ form }}
+
+                    <div class="card p-4">
+                        <div class=" image d-flex flex-column justify-content-center align-items-center">
+                            <span class="name mt-3">{{ user.profile.first_name }} {{ user.profile.last_name }}</span>
+                            <span class="idd">{{ user.email }}</span>
+                            {% if not user.profile.description %}
+                                <div class="text mt-3"><span>No description</span></div>
+                            {% else %}
+                                <div class="text mt-3"><span>{{ user.profile.description }} </span></div>
+                            {% endif %}
+                            <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"><span><i
+                                    class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span>
+                                <span><i
+                                        class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span>
                             </div>
-                            <button class="btn btn-primary mt-2" type="submit">Ban</button>
-                            <a href="{% url 'dashboard' %}" class="btn btn-primary mt-2">Back</a>
+                            <div class="px-2 rounded mt-4 date "><span class="join">Joined {{ user.date_joined }}</span>
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="px-4 py-5 my-5 text-center">
+                        <h3 class="text-center">Ban. By clicking the field you will ban the user.</h3>
+                        <form method="post">
+                            <div class="container">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    {{ form }}
+                                </div>
+                                <button class="btn btn-primary mt-2" type="submit">Ban</button>
+                                <a href="{% url 'dashboard' %}" class="btn btn-primary mt-2">Back</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3"></div>
                 </div>
-                <div class="col-lg-3"></div>
             </div>
         </div>
     </div>

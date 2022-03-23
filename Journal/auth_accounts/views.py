@@ -70,13 +70,19 @@ class BanUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         return self.request.user.email.endswith('@staff.com')
 
+    def get_context_data(self, **kwargs):
+        context = super(BanUpdate, self).get_context_data()
+        user = get_object_or_404(UserModel, id=self.kwargs['pk'])
+        context['user'] = user
+        return context
+
 
 class DashboardStaff(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Profile
     template_name = 'user/staff_dashboard.html'
 
     def test_func(self):
-        return self.request.user.email.endswith('@staff.com')
+        return self.request.user.email.endswith('@staff.com' or '@admin.com')
 
     def get_context_data(self, **kwargs):
         context = super(DashboardStaff, self).get_context_data()

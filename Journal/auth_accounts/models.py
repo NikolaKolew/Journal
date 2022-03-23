@@ -81,4 +81,3 @@ class BanUser(models.Model):
     is_banned = models.BooleanField(
         default=False,
     )
-

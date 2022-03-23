@@ -11,12 +11,6 @@ from Journal.web_app.models import Journal
 UserModel = get_user_model()
 
 
-# if request.path
-
-# TODO make CBV for the index page
-# def index_view(request):
-#     return render(request, 'index.html')
-
 class IndexView(TemplateView):
     template_name = 'index.html'
 

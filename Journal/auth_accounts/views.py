@@ -36,7 +36,6 @@ class CustomLoginView(LoginView):
     # redirect_authenticated_user = True
     success_url = reverse_lazy('home')
 
-
     def get_success_url(self):
         if self.success_url:
             return self.success_url
@@ -70,7 +69,6 @@ class BanUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return self.request.user.email.endswith('@staff.com')
-
 
 
 class DashboardStaff(LoginRequiredMixin, UserPassesTestMixin, ListView):

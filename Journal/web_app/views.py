@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
 
@@ -35,7 +34,6 @@ class ContactView(CreateView):
         if self.request.user.is_authenticated:
             return reverse_lazy('home')
         return reverse_lazy('index')
-
 
 
 class ProfileList(LoginRequiredMixin, ListView):

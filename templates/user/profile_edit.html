@@ -12,7 +12,7 @@
                             {% csrf_token %}
                             {{ form }}
                             <button class="btn btn-primary mt-2" type="submit">Edit</button>
-                            <a href="{% url 'profile-page' %}" class="btn btn-primary mt-2">Back</a>
+                            <a href="{% url 'profile-page' request.user.id%}" class="btn btn-primary mt-2">Back</a>
                         </div>
                     </form>
                 </div>

@@ -47,7 +47,6 @@ class PostDetail(LoginRequiredMixin, DetailView):
         return context
 
 
-
 class EditPost(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'posts/post_update.html'
@@ -81,7 +80,6 @@ class EditComment(LoginRequiredMixin, UpdateView):
     model = Comment
     template_name = 'posts/update_comment.html'
     form_class = EditCommentForm
-    # success_url = reverse_lazy('posts')
 
     def get_success_url(self):
         post_id = Comment.objects.filter(id=self.kwargs['pk']).get().post_id
@@ -91,7 +89,10 @@ class EditComment(LoginRequiredMixin, UpdateView):
 class DeleteComment(LoginRequiredMixin, DeleteView):
     model = Comment
     template_name = 'posts/delete_comment.html'
-    success_url = reverse_lazy('posts')
+
+    def get_success_url(self):
+        post_id = Comment.objects.filter(id=self.kwargs['pk']).get().post_id
+        return reverse_lazy('detail-post', kwargs={'pk': post_id})
 
 
 def like_view(request, pk):
@@ -103,4 +104,4 @@ def like_view(request, pk):
     else:
         post.like.add(request.user)
         liked = True
-    return HttpResponseRedirect(reverse('detail-post', args=[str(pk)]))
+    return HttpResponseRedirect(reverse_lazy('detail-post', args=[str(pk)]))

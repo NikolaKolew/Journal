@@ -44,7 +44,7 @@
                         <li><a class="dropdown-item " href="{% url 'posts' %}">Posts</a></li>
                         <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
                         <li><a class="dropdown-item " href="{% url 'home' %}">Home</a></li>
-                        <li><a class="dropdown-item" href="{% url 'profile-page'%}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profile-page' request.user.id%}">Profile</a></li>
                         <li>
                             <hr>
                         </li>
@@ -63,7 +63,7 @@
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                         <li><a class="dropdown-item " href="{% url 'posts' %}">Posts</a></li>
                         <li><a class="dropdown-item" href="{% url 'journals' %}">Journals</a></li>
-                        <li><a class="dropdown-item" href="{% url 'profile-page'%}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profile-page' request.user.id%}">Profile</a></li>
                         <li><a class="dropdown-item " href="{% url 'home' %}">Home</a></li>
                         <li>
                             <hr>

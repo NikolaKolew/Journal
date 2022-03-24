@@ -39,3 +39,19 @@ class Journal(models.Model):
 
     class Meta:
         ordering = ['create']
+
+
+class Contact(models.Model):
+    SUBJECT_MAX_LENGTH = 20
+
+    email = models.EmailField()
+    subject = models.CharField(
+        max_length=SUBJECT_MAX_LENGTH,
+        validators=(
+            min_length_validator,
+        )
+    )
+    message = models.TextField()
+
+    def __str__(self):
+        return f'{self.email}'

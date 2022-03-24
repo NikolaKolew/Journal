@@ -93,6 +93,6 @@ class DashboardStaff(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return context
 
 
-class UserChangePassword(PasswordChangeView):
+class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
     template_name = 'user/change_password.html'
     success_url = reverse_lazy('login')

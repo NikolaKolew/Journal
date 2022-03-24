@@ -48,6 +48,19 @@ class PostDetail(LoginRequiredMixin, DetailView):
 
 
 
+class EditPost(LoginRequiredMixin, UpdateView):
+    model = Post
+    template_name = 'posts/post_update.html'
+    form_class = EditPostForm
+    success_url = reverse_lazy('posts')
+
+
+class DeletePost(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'posts/post_delete.html'
+    success_url = reverse_lazy('posts')
+
+
 class CreateComment(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CreateCommentForm
@@ -64,24 +77,15 @@ class CreateComment(LoginRequiredMixin, CreateView):
         return reverse_lazy('detail-post', kwargs={'pk': post_id})
 
 
-class EditPost(LoginRequiredMixin, UpdateView):
-    model = Post
-    template_name = 'posts/post_update.html'
-    form_class = EditPostForm
-    success_url = reverse_lazy('posts')
-
-
-class DeletePost(LoginRequiredMixin, DeleteView):
-    model = Post
-    template_name = 'posts/post_delete.html'
-    success_url = reverse_lazy('posts')
-
-
 class EditComment(LoginRequiredMixin, UpdateView):
     model = Comment
     template_name = 'posts/update_comment.html'
     form_class = EditCommentForm
-    success_url = reverse_lazy('posts')
+    # success_url = reverse_lazy('posts')
+
+    def get_success_url(self):
+        post_id = Comment.objects.filter(id=self.kwargs['pk']).get().post_id
+        return reverse_lazy('detail-post', kwargs={'pk': post_id})
 
 
 class DeleteComment(LoginRequiredMixin, DeleteView):

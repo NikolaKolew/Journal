@@ -58,10 +58,12 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
     model = Profile
     template_name = 'user/profile_edit.html'
     form_class = EditProfileForm
+
     # success_url = reverse_lazy('profile-page')
     def get_success_url(self):
         profile_id = Profile.objects.filter(user_id=self.kwargs['pk']).get().user_id
         return reverse_lazy('profile-page', kwargs={'pk': profile_id})
+
 
 class BanUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BanUser

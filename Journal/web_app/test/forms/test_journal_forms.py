@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from Journal.web_app.forms import CreateJournalForm, EditJournalForm
+from Journal.web_app.forms import CreateJournalForm, EditJournalForm, CreateContactForm
 
 
 class TestJournalForms(TestCase):
@@ -13,6 +13,27 @@ class TestJournalForms(TestCase):
         'title': 'T',
         'description': 'This is description',
     }
+
+    VALID_CONTACT_FORM_DATA = {
+        'email': 'test@test.com',
+        'subject': 'hello',
+        'message': 'I found a bug ',
+    }
+    INVALID_CONTACT_FORM_DATA = {
+        'email': 'test@test.com',
+        'subject': '',
+        'message': 'I found a bug ',
+    }
+
+    def test_contact_form_excepts_to_be_valid(self):
+        contact = self.VALID_CONTACT_FORM_DATA
+        form = CreateContactForm(contact)
+        self.assertTrue(form.is_valid())
+
+    def test_contact_form_excepts_to_be_invalid(self):
+        contact = self.INVALID_CONTACT_FORM_DATA
+        form = CreateContactForm(contact)
+        self.assertFalse(form.is_valid())
 
     def test_create_journal_form_excepts_to_be_valid(self):
         journal = self.VALID_JOURNAL_DATA

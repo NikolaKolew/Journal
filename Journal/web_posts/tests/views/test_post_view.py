@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from Journal.auth_accounts.models import Profile
-from Journal.web_posts.models import Post
+from Journal.web_posts.models import Post, Comment
 
 UserModel = get_user_model()
 
@@ -22,6 +22,11 @@ class TestPostsViews(TestCase):
         'body': 'My new post',
     }
 
+    VALID_COMMENT_DATA = {
+        'post_id': 1,
+        'description': 'New comment',
+    }
+
     def __create_post_for_user(self, user):
         post = Post.objects.create(
             **self.VALID_POST_DATA,
@@ -30,6 +35,17 @@ class TestPostsViews(TestCase):
 
         post.save()
         return post
+
+    def __create_comment_for_user(self, user):
+        self.__create_post_for_user(user)
+        comment = Comment.objects.create(
+            **self.VALID_COMMENT_DATA,
+            user=user,
+        )
+
+        comment.save()
+        return comment
+
 
     def __create_user(self, **data):
         user = UserModel.objects.create_user(**data)
@@ -42,6 +58,7 @@ class TestPostsViews(TestCase):
 
     def __get_post_details(self, post):
         return self.client.get(reverse('detail-post', kwargs={'pk': post.pk}))
+
 
     def __get_all_posts(self):
         return self.client.get(reverse('posts'))
@@ -58,7 +75,7 @@ class TestPostsViews(TestCase):
         self.__get_post_details(post)
         self.assertTemplateUsed('posts/post_details.html')
 
-    def test_create_journal_valid_data(self):
+    def test_create_post_valid_data(self):
         user, profile = self.__create_profile_and_user()
         self.__create_post_for_user(user)
         self.client.post(
@@ -71,12 +88,15 @@ class TestPostsViews(TestCase):
         self.assertEqual(self.VALID_POST_DATA['title'], post.title)
         self.assertEqual(self.VALID_POST_DATA['body'], post.body)
 
-    def test_create_valid_post_redirect_posts(self):
-        self.__create_profile_and_user()
-        response = self.client.post(
-            reverse('create-post'),
-            data=self.VALID_POST_DATA,
-        )
-        Profile.objects.first()
-        expected_url = reverse('posts')
-        self.assertRedirects(response, expected_url)
+    # def test_create_comment_valid_data(self):
+    #     user, profile = self.__create_profile_and_user()
+    #     self.__create_comment_for_user(user)
+    #     self.client.post(
+    #         reverse('create-comment'),
+    #         data=self.VALID_COMMENT_DATA
+    #     )
+    #
+    #     comment = Comment.objects.first()
+    #     self.assertIsNotNone(comment)
+    #     self.assertEqual(self.VALID_COMMENT_DATA['post_id'], comment.post_id)
+    #     self.assertEqual(self.VALID_COMMENT_DATA['description'], comment.description)

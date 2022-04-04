@@ -4,6 +4,8 @@ from django.contrib.auth import models as auth_models
 from Journal.auth_accounts.managers import AppUsersManager
 from Journal.validators.validators import name_only_letters_validator, min_length_validator
 
+from cloudinary.models import CloudinaryField
+
 
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
@@ -56,10 +58,7 @@ class Profile(models.Model):
         null=True,
         blank=True,
     )
-    picture = models.FileField(
-        null=True,
-        blank=True,
-    )
+    picture = CloudinaryField('image')
 
     user = models.OneToOneField(
         AppUser,

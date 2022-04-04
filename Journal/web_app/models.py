@@ -3,6 +3,9 @@ from django.db import models
 
 from Journal.validators.validators import min_length_validator
 
+from cloudinary.models import CloudinaryField
+
+
 UserModel = get_user_model()
 
 
@@ -13,10 +16,7 @@ class Journal(models.Model):
         on_delete=models.CASCADE,
     )
 
-    picture = models.FileField(
-        null=True,
-        blank=True,
-    )
+    picture = CloudinaryField('image')
 
     title = models.CharField(
         max_length=TITLE_MAX_CHARS,

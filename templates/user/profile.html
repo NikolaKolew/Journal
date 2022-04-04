@@ -7,8 +7,8 @@
             <div class="card p-4">
                 <div class=" image d-flex flex-column justify-content-center align-items-center">
                     <a href="{% url 'profile-update' user.id %}" class="btn btn-secondary">
-                        {% if user.profile.picture %}
-                            <img src="{{ user.profile.picture }}" height="100" width="100"/>
+                        {% if user.profile.picture.url %}
+                            <img src="{{ user.profile.picture.url }}" height="100" width="100"/>
                         {% else %}
                             <img src="/static/images/profile-pic.png" height="100" width="100"/>
                         {% endif %}

@@ -58,7 +58,7 @@ class Profile(models.Model):
         null=True,
         blank=True,
     )
-    picture = CloudinaryField('image')
+    picture = CloudinaryField('image', null=True, blank=True)
 
     user = models.OneToOneField(
         AppUser,

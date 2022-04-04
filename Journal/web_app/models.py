@@ -16,7 +16,7 @@ class Journal(models.Model):
         on_delete=models.CASCADE,
     )
 
-    picture = CloudinaryField('image')
+    picture = CloudinaryField('image', null=True, blank=True)
 
     title = models.CharField(
         max_length=TITLE_MAX_CHARS,

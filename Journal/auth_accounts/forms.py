@@ -57,7 +57,6 @@ class EditProfileForm(BootstrapFormMixin, forms.ModelForm):
         exclude = ('user',)
 
 
-
 class BanUserForm(forms.ModelForm):
     class Meta:
         model = BanUser

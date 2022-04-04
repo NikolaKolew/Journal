@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'Journal.auth_accounts',
     'Journal.web_posts',
     'annoying',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -165,12 +166,13 @@ LOGIN_URL = 'login'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-cloudinary.config(
-  cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME', None),
-  api_key = os.getenv('CLOUDINARY_API_KEY', None),
-  api_secret = os.getenv('CLOUDINARY_API_SECRET', None)
-)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'auth_accounts.AppUser'
+
+cloudinary.config(
+  cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME', None),
+  api_key=os.getenv('CLOUDINARY_API_KEY', None),
+  api_secret=os.getenv('CLOUDINARY_API_SECRET', None),
+)

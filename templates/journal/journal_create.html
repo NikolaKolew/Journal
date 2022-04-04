@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-3"></div>
                 <div class="px-4 py-5 my-5 col-lg-6">
-                <form method="POST" class="container mb-5" action="{% url 'create-journal' %}">
+                <form method="POST" class="container mb-5" action="{% url 'create-journal' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                     <div class="form-group">
                     {{ form }}

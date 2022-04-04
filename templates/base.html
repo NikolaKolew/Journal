@@ -34,8 +34,8 @@
         {% if user.is_staff and user.is_authenticated%}
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                       {% if user.profile.picture %}
-                        <img src="{{ user.profile.picture }}" alt="mdo" width="32" height="32" class="rounded-circle">
+                       {% if user.profile.picture.url %}
+                        <img src="{{ user.profile.picture.url }}" alt="mdo" width="32" height="32" class="rounded-circle">
                        {% else %}
                            <img src="/static/images/profile-picture.png" alt="mdo" width="32" height="32" class="rounded-circle">
                        {% endif %}
@@ -54,8 +54,8 @@
             {% else %}
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                       {% if user.profile.picture %}
-                        <img src="{{ user.profile.picture }}" alt="mdo" width="32" height="32" class="rounded-circle">
+                       {% if user.profile.picture.url %}
+                        <img src="{{ user.profile.picture.url }}" alt="mdo" width="32" height="32" class="rounded-circle">
                        {% else %}
                            <img src="/static/images/profile-picture.png" alt="mdo" width="32" height="32" class="rounded-circle">
                        {% endif %}

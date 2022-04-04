@@ -13,7 +13,7 @@
 <img src="static/images/profile.png">
 <p>-You can create journals</p>
 <p>-You can create public posts, comment them and like them</p>
-<p>There are 'staff' they can't post comment ot create journals but
+<p>There are 'staff' they can't post comment or create journals but
 they can ban users from posting and commenting. They have a special dashboard for 
 that. You can only see it if you have staff permission!</p>
 

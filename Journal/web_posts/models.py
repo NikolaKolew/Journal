@@ -79,3 +79,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['create']
+
+    def __str__(self):
+        return f'Post ID: {self.post_id} | Post title: {self.post.title}'

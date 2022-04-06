@@ -100,6 +100,7 @@ if APP_ENVIRONMENT == 'Production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
+            'DATABASE_URL': os.getenv('DATABASE_URL'),
             'NAME': os.getenv('DB_NAME'),
             'USER': os.getenv('DB_USER'),
             'PASSWORD': os.getenv('DB_PASSWORD'),
@@ -116,6 +117,7 @@ else:
             'PASSWORD': '1123QwER',
             'HOST': '127.0.0.1',
             'PORT': '5432',
+
         }
     }
 

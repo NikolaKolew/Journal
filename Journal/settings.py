@@ -32,7 +32,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
 #     [
 #     'localhost',
 #     '127.0.0.1',
-#     'journal-n.herokuapp.com',
+#     'journal-nn.herokuapp.com',
 # ]
 
 # Application definition

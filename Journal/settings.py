@@ -104,7 +104,8 @@ if APP_ENVIRONMENT == 'Production':
             'NAME': os.getenv('DB_NAME'),
             'USER': os.getenv('DB_USER'),
             'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
+            # 'HOST': os.getenv('DB_HOST'),
+            'HOST': 'ec2-52-30-67-143.eu-west-1.compute.amazonaws.com',
             'PORT': '5432',
         }
     }

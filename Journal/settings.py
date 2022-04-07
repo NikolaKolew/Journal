@@ -99,7 +99,7 @@ DATABASES = None
 if APP_ENVIRONMENT == 'Production':
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             # 'DATABASE_URL': os.getenv('DATABASE_URL'),
             'NAME': os.getenv('DB_NAME'),
             'USER': os.getenv('DB_USER'),

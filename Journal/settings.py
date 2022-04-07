@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'Journal.wsgi.application'
 # }
 
 DATABASES = None
-
+DATABASE_URL = 'postgres://pdksotbhrdajas:296ae70f8797fab2233c6ed4f15f51ffb841ebf44f5b59638f5ba90823a13d36@ec2-52-30-67-143.eu-west-1.compute.amazonaws.com:5432/d99dg1fuopbuh2'
 if APP_ENVIRONMENT == 'Production':
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             # 'DATABASE_URL': os.getenv('DATABASE_URL'),
             'NAME': os.getenv('DB_NAME'),
             'USER': os.getenv('DB_USER'),

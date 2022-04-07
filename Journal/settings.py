@@ -100,6 +100,7 @@ if APP_ENVIRONMENT == 'Production':
     DATABASES = {
         'default': os.getenv('DATABASE_URL'),
     }
+    
     # DATABASES = {
     #     'default': {
     #         'ENGINE': 'django.db.backends.postgresql',

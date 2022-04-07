@@ -32,7 +32,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
 #     [
 #     'localhost',
 #     '127.0.0.1',
-#     'journal-nn.herokuapp.com',
+#     'journal-n.herokuapp.com',
 # ]
 
 # Application definition
@@ -108,7 +108,7 @@ if APP_ENVIRONMENT == 'Production':
             'PORT': '5432',
         }
     }
-    
+
 else:
     DATABASES = {
         'default': {

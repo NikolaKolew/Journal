@@ -101,10 +101,13 @@ if APP_ENVIRONMENT == 'Production':
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             # 'DATABASE_URL': os.getenv('DATABASE_URL'),
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
+            # 'NAME': os.getenv('DB_NAME'),
+            # 'USER': os.getenv('DB_USER'),
+            # 'PASSWORD': os.getenv('DB_PASSWORD'),
             # 'HOST': os.getenv('DB_HOST'),
+            'NAME': 'd99dg1fuopbuh2',
+            'USER': 'pdksotbhrdajas',
+            'PASSWORD': '296ae70f8797fab2233c6ed4f15f51ffb841ebf44f5b59638f5ba90823a13d36',
             'HOST': 'ec2-52-30-67-143.eu-west-1.compute.amazonaws.com',
             'PORT': '5432',
         }

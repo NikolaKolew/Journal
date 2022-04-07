@@ -109,7 +109,6 @@ if APP_ENVIRONMENT == 'Production':
             'PORT': '5432',
         }
     }
-
 else:
     DATABASES = {
         'default': {

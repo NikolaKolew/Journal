@@ -1,5 +1,5 @@
 <h1>Journal</h1>
-<p>Link to project in production: <a href="https://journal-n.herokuapp.com/">Journal</a></p>
+<p>Link to project in production: <a href="https://journal-a.herokuapp.com/">Journal</a></p>
 
 <p>Welcome page</p>
 <img src="static/images/home_screen.png">

@@ -1,5 +1,6 @@
 <h1>Journal</h1>
 <p>Link to the project: <a href="https://journal-a.herokuapp.com/">Journal</a></p>
+If you want to test the app use:
 <p> -email: test@user.com </p>
 <p> -password: qV~!8x>>L# </p>
 
@@ -19,5 +20,3 @@
 they can ban users from posting and commenting. They have a special dashboard for 
 that. You can only see it if you have staff permission!</p>
 
-
-If you want to test the app use:

@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-#!^bbleg!y2%vo(6vd#l(qph&d+nkboh@&3xs_*@e&@qwoj^nu
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT', 'Development')
 
+
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(' ')
 #     [
 #     'localhost',
@@ -99,16 +100,11 @@ if APP_ENVIRONMENT == 'Production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            # 'DATABASE_URL': os.getenv('DATABASE_e_URL'),
-            # 'NAME': os.getenv('DB_e_NAME'),
-            # 'USER': os.getenv('DB_e_USER'),
-            # 'PASSWORD': os.getenv('DB_e_PASSWORD'),
-            # 'HOST': os.getenv('DB_e_HOST'),
-            'DATABASE_URL': os.getenv('DATABASE_URL'),
-            'NAME': 'd99dg1fuopbuh2',
-            'USER': 'pdksotbhrdajas',
-            'PASSWORD': '296ae70f8797fab2233c6ed4f15f51ffb841ebf44f5b59638f5ba90823a13d36',
-            'HOST': 'ec2-52-30-67-143.eu-west-1.compute.amazonaws.com',
+            'DATABASE_URL': os.getenv('DATABASE_e_URL'),
+            'NAME': os.getenv('DB_e_NAME'),
+            'USER': os.getenv('DB_e_USER'),
+            'PASSWORD': os.getenv('DB_e_PASSWORD'),
+            'HOST': os.getenv('DB_e_HOST'),
             'PORT': '5432',
         }
     }
@@ -157,6 +153,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
@@ -178,7 +175,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'auth_accounts.AppUser'
 
 cloudinary.config(
-    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME', None),
-    api_key=os.getenv('CLOUDINARY_API_KEY', None),
-    api_secret=os.getenv('CLOUDINARY_API_SECRET', None),
+  cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME', None),
+  api_key=os.getenv('CLOUDINARY_API_KEY', None),
+  api_secret=os.getenv('CLOUDINARY_API_SECRET', None),
 )

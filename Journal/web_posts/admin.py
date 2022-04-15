@@ -6,8 +6,8 @@ from Journal.web_posts.models import Comment, Post
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('post', 'user')
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('title', 'user')

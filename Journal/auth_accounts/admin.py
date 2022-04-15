@@ -6,12 +6,13 @@ from Journal.auth_accounts.models import AppUser, Profile, BanUser
 
 @admin.register(AppUser)
 class AppUserAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('is_staff', 'groups')
+
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('first_name',)
 
 @admin.register(BanUser)
 class BanUserAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('is_banned',)

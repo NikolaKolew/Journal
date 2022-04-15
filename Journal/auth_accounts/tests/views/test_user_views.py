@@ -62,3 +62,32 @@ class TestProfileDetails(TestCase):
         total_posts = Post.objects.filter(user=user).count()
 
         self.assertEqual(0, total_posts)
+
+    def test_update_user_data(self):
+        user, profile = self.__create_profile_and_user()
+
+        response = self.client.post(
+            reverse('profile-update', kwargs={
+                'pk': profile.pk,
+            }),
+            {
+                'first_name': 'Nikola',
+                'last_name': 'Kolev',
+                'description': 'des',
+            }
+        )
+        self.assertEqual(response.status_code, 302)
+
+
+        # self.assertEqual('des', profile.description)
+
+    def test_profile_when_user_exist(self):
+        user = UserModel.objects.create_user(**self.VALID_USER_DATA)
+        profile = Profile.objects.create(**self.VALID_PROFILE_DATA, user=user)
+        response = self.client.get(reverse('profile-page', kwargs={
+            'pk': profile.pk,
+        }))
+
+        self.assertEqual(response.status_code, 302)
+
+        # self.assertEqual(profile, current_profile)

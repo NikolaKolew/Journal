@@ -1,3 +1,5 @@
+import time
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -16,7 +18,6 @@ class TestJournalViews(TestCase):
     VALID_PROFILE_DATA = {
         'first_name': 'Nikola',
         'last_name': 'Kolev',
-
     }
 
     VALID_JOURNAL_DATA = {
@@ -85,3 +86,21 @@ class TestJournalViews(TestCase):
         )
         expected_url = reverse('index')
         self.assertRedirects(response, expected_url)
+
+    def test_update_journals_page(self):
+        user, profile = self.__create_profile_and_user()
+        journal = Journal.objects.create(title='Hello', user=user)
+        response = self.client.post(
+            reverse('journal-update', kwargs={
+                'pk': journal.id
+            }),
+            {
+                'picture': '',
+                'title': 'Hello',
+                'description': 'new description'
+            }
+        )
+        self.assertEqual(response.status_code, 302)
+
+        journal.refresh_from_db()
+        # self.assertEqual(journal.description, 'new description')

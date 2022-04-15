@@ -78,7 +78,6 @@ class TestProfileDetails(TestCase):
         )
         self.assertEqual(response.status_code, 302)
 
-
         # self.assertEqual('des', profile.description)
 
     def test_profile_when_user_exist(self):
@@ -91,3 +90,20 @@ class TestProfileDetails(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # self.assertEqual(profile, current_profile)
+
+    def test_update_user_data_redirect(self):
+        user, profile = self.__create_profile_and_user()
+        self.client.force_login(user=user)
+        response = self.client.post(
+            reverse('profile-update', kwargs={
+                'pk': profile.pk,
+            }),
+            {
+                'first_name': 'Nikola',
+                'last_name': 'Kolev',
+                'description': 'des',
+            }
+        )
+
+        profile_user = Profile.objects.first()
+        self.assertRedirects(response, reverse('profile-page', kwargs={'pk': profile_user.pk}))
